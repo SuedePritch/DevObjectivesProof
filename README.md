@@ -1,4 +1,5 @@
 # DevObjectivesProof
+
 Installed  
 &#9745; React  
 &#9745; Redux  
@@ -13,14 +14,14 @@ Installed
 &#9745; Voca  
 &#9745; Date-Fns  
 &#9745; AJV/JSON Schema  
+&#9745; Babel  
+&#9745; Webpack
 
 &#9744; FontAwesome  
-&#9744; Babel  
-&#9744; Webpack  
 &#9744; Docker  
 &#9744; ES6 ES7  
 &#9744; Promises  
 &#9744; Async/Await  
 &#9744; Object mutability/immutability  
 &#9744; HTTP REST API principles  
-&#9744; MongoDB & CRUD  
+&#9744; MongoDB & CRUD
