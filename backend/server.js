@@ -1,9 +1,14 @@
-import express from "express";
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config();
-// eslint-disable-next-line no-undef
+/* eslint-disable*/
+const express = require("express");
+require("dotenv").config();
+const db = require("./config/connection.js");
+const colors = require("colors");
 const PORT = process.env.PORT || 3000;
+/*eslint-enable*/
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send(`
     <a href="/user">User</a>
@@ -27,6 +32,10 @@ app.delete("/user", (req, res) => {
   res.send("Got a DELETE request at /user");
 });
 
-app.listen(PORT, () => {
-  console.log(`API server listening on PORT ${PORT}`);
+db.once("open", () => {
+  app.listen(PORT, () => {
+    console.log("--------------------------------".bgBlue);
+    console.log("--API Running on PORT--".bgBlue, PORT, "---".bgBlue);
+    console.log("--------------------------------".bgBlue);
+  });
 });
