@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import Login from './components/Login'
+import Signup from './components/Signup'
 
 
 export const API_URL = "http://localhost:8080"
@@ -41,6 +42,7 @@ function App() {
         {/* <h1 className="user-list-item">{user.username}</h1>
         <button onClick={logStore}>log store</button>
         <button onClick={updateUser}>setUser</button> */}
+        <Signup/>
         <Login/>
     </div>
   );

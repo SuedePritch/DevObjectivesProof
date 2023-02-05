@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
 
-//POST /api/users
+//POST /users
 //ACCESS PUBLIC
 const signupUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -45,7 +45,7 @@ const signupUser = asyncHandler(async (req, res) => {
   }
 });
 
-//POST /api/users/login
+//POST /users/login
 //ACCESS PUBLIC
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -64,7 +64,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-//GET /api/users/me
+//GET /users/me
 //ACCESS PRIVATE
 const getMyUser = asyncHandler(async (req, res) => {
   res.status(200).json(req.user);
