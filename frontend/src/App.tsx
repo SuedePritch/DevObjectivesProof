@@ -1,25 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import store from './redux/store'
+import { setUser } from './redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { State }  from './redux/reducers'
+import {USER} from './types/User.types'
+import axios from 'axios'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
+
 function App() {
+  const user = useSelector((state: State) => state.user);
+  const dispatch = useDispatch();
+  const logStore = () =>{
+    const currentState = store.getState()
+    console.log(currentState)
+  }
+  
+  const updateUser = async () =>{
+    try{
+      const response = await axios.get("http://localhost:8080/api/user");
+      const user:USER = response.data
+      dispatch(setUser(user))
+    }catch(err){
+      alert(err)
+    }
+  }
+ 
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <h1 className="user-list-item">{user.username} {user.email}</h1>
+        <button onClick={logStore}>log store</button>
+        <button onClick={updateUser}>setUser</button>
     </div>
   );
 }

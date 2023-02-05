@@ -25,5 +25,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^8.32.0",
     "eslint-plugin-react": "^7.32.1"
+  },
+  "dependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }
