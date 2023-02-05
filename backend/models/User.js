@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 //User schema
 //username of the user needs to be unique
@@ -23,7 +24,24 @@ const UserSchema = new Schema({
       message: "Please enter a valid email",
     },
   },
+  password: {
+    type: String,
+    required: true,
+    minLength: 8,
+  },
 });
+
+UserSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+  next();
+});
+
+UserSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model("User", UserSchema);
 
@@ -36,6 +54,7 @@ User.find({}).exec((err, collection) => {
       {
         username: "james",
         email: "james@gmail.com",
+        password: "password",
       },
       (err) => (err ? handleError(err) : console.log("Created new document"))
     );

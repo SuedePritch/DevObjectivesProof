@@ -21,9 +21,16 @@ router.get("/:id", (req, res) => {
       res.status(200).json(user);
     });
 });
-
-//NEW USER
-router.post("/", (req, res) => {
+//LOGIN
+router.post("/login", async (req, res) => {
+  User.findOne({
+    email: req.body.email,
+  }).then(function (user) {
+    res.status(200).json(user);
+  });
+});
+//SIGNUP
+router.post("/signup", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
