@@ -5,6 +5,7 @@ import React from 'react';
 // import { State }  from './redux/reducers'
 // import {USER} from './types/User.types'
 // import axios from 'axios'
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login'
 
 
-
+export const API_URL = "http://localhost:8080"
 
 function App() {
   // const user = useSelector((state: State) => state.user);
