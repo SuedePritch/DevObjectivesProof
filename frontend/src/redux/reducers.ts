@@ -12,7 +12,7 @@ export interface State {
 const initialState: State = {
   user:{
     _id:"",
-    username: "",
+    username:"Default Username",
     email: ""
   }
 };

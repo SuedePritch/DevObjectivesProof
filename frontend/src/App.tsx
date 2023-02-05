@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const user = useSelector((state: State) => state.user);
   const dispatch = useDispatch();
+
   const logStore = () =>{
     const currentState = store.getState()
     console.log(currentState)
@@ -21,9 +22,10 @@ function App() {
   
   const updateUser = async () =>{
     try{
-      const response = await axios.get("http://localhost:8080/api/user");
-      const user:USER = response.data
-      dispatch(setUser(user))
+      const response = await axios.get("http://localhost:8080/api/user/63cc291c978fffe40b64e3e9");
+      const newUser:USER = response.data
+      console.log(newUser);
+      dispatch(setUser(newUser))
     }catch(err){
       alert(err)
     }
@@ -32,7 +34,7 @@ function App() {
   
   return (
     <div className="App">
-        <h1 className="user-list-item">{user.username} {user.email}</h1>
+        <h1 className="user-list-item">{user.username}</h1>
         <button onClick={logStore}>log store</button>
         <button onClick={updateUser}>setUser</button>
     </div>
