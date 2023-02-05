@@ -1,13 +1,16 @@
 import React from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux';
 import { USER } from '../types/User.types'
+import { setUser } from '../redux/actions'
 import {API_URL} from '../App'
 function Signup() {
+  const dispatch = useDispatch();
   const signup = async ( signupData:USER ) => {
     const response = await axios.post(`${API_URL}/user/`, signupData)
 
     if (response.data) {
-    localStorage.setItem('user', JSON.stringify(response.data))
+      dispatch(setUser(response.data))
 }
 return response.data
 }

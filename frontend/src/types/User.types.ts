@@ -4,7 +4,8 @@ export interface USER {
     _id: string;
     username: string;
     email: string;
-    password:string
+    password:string;
+    token:string
   }
 
 export type USERS = Array<USER>

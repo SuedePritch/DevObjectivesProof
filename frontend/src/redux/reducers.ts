@@ -5,7 +5,8 @@ export interface State {
   user: {
     _id: string,
     username: string,
-    email: string
+    email: string,
+    token:string
   }
 }
 
@@ -13,14 +14,14 @@ const initialState: State = {
   user:{
     _id:"",
     username:"Default Username",
-    email: ""
+    email: "",
+    token:""
   }
 };
 
 const reducer= (state = initialState, action:ActionType): State => {
   switch (action.type) {
     case  SET_USER:
-      console.log(action.payload)
       return {
         ...state,
         user: action.payload
