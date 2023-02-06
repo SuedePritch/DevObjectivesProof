@@ -27,8 +27,12 @@ function App() {
   
   return (
     <div className="App bg-dark">
+        {user? <p id='username'>{user.username}</p>: 
+        <>
         <Login/>
         <Signup/>
+        </>
+        }
     </div>
   );
 }

@@ -61,7 +61,7 @@ return response.data
           <FontAwesomeIcon icon={faLock} />&nbsp;Password
           </Label>
         </FormGroup>
-        <Button className='bg-success'>
+        <Button className='login-submit bg-success'>
           Submit
         </Button>
       </Form>

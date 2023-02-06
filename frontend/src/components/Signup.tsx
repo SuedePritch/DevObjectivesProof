@@ -24,9 +24,9 @@ return response.data
     const handleSignup = (event:any) =>{
         event.preventDefault()
         const signupData:any = {
-          username: event.target.username.value,
-          email: event.target.email.value,
-          password: event.target.password.value
+          username: event.target.signupUsername.value,
+          email: event.target.signupEmail.value,
+          password: event.target.signupPassword.value
         }
         signup(signupData)
        
@@ -68,7 +68,7 @@ return response.data
           <FontAwesomeIcon icon={faLock} />&nbsp;Password
           </Label>
         </FormGroup>
-        <Button className='bg-success'>
+        <Button className='signup-submit bg-success'>
           Submit
         </Button>
       </Form>
