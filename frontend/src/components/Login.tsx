@@ -36,7 +36,7 @@ return response.data
     }
 
   return (
-    <FormContainer>
+    <FormContainer className='Login'>
       <Form onSubmit={handleLogin} className="p-3 my-2 text-muted bg-light">
         <h2 className='py-2'>Login</h2>
         <FormGroup floating>

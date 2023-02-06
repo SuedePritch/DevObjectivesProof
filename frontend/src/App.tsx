@@ -1,8 +1,8 @@
 import React from 'react';
 // import store from './redux/store'
 // import { setUser } from './redux/actions';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { State }  from './redux/reducers'
+import { useSelector} from 'react-redux';
+import { State }  from './redux/reducers'
 // import {USER} from './types/User.types'
 // import axios from 'axios'
 
@@ -17,24 +17,12 @@ import Signup from './components/Signup'
 export const API_URL = "http://localhost:8080"
 
 function App() {
-  // const user = useSelector((state: State) => state.user);
-  // const dispatch = useDispatch();
-
-  // const logStore = () =>{
-  //   const currentState = store.getState()
-  //   console.log(currentState)
-  // }
-  
-  // const updateUser = async () =>{
-  //   try{
-  //     const response = await axios.get("http://localhost:8080/api/user/63cc291c978fffe40b64e3e9");
-  //     const newUser:USER = response.data
-  //     console.log(newUser);
-  //     dispatch(setUser(newUser))
-  //   }catch(err){
-  //     alert(err)
-  //   }
-  // }
+  let user;
+  const getstate = useSelector((state: State) => state.user);
+  if(getstate._id.length > 0){
+    user = getstate
+  }
+  console.log(user);
  
   
   return (
