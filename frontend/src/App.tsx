@@ -38,12 +38,9 @@ function App() {
  
   
   return (
-    <div className="App">
-        {/* <h1 className="user-list-item">{user.username}</h1>
-        <button onClick={logStore}>log store</button>
-        <button onClick={updateUser}>setUser</button> */}
-        <Signup/>
+    <div className="App bg-dark">
         <Login/>
+        <Signup/>
     </div>
   );
 }

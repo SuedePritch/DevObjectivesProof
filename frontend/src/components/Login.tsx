@@ -1,9 +1,19 @@
 import React from 'react'
 import axios from 'axios'
+
+import FormContainer from '../styledComponents/FormContainer';
+import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+
 import { useDispatch } from 'react-redux';
 import { USER } from '../types/User.types'
 import { setUser } from '../redux/actions'
 import {API_URL} from '../App'
+
+
+
+
 function Login() {
   const dispatch = useDispatch();
   const login = async ( loginData:USER ) => {
@@ -24,14 +34,38 @@ return response.data
         login(loginData)
        
     }
+
   return (
-    <div>
-        <form action="login" onSubmit={handleLogin}>
-            <input type="email" name="email" id="email" placeholder='email' autoComplete='email'/>
-            <input type="password" name="password" id="password" placeholder='password' autoComplete='password'/>
-            <button type="submit">Login</button>
-        </form>
-    </div>
+    <FormContainer>
+      <Form onSubmit={handleLogin} className="p-3 my-2 text-muted bg-light">
+        <h2 className='py-2'>Login</h2>
+        <FormGroup floating>
+          <Input
+            id="loginEmail"
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
+          <Label for="loginEmail">
+          <FontAwesomeIcon icon={faEnvelope} />&nbsp;Email
+          </Label>
+        </FormGroup>
+        <FormGroup floating>
+          <Input
+            id="loginPassword"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
+          <Label for="loginPassword">
+          <FontAwesomeIcon icon={faLock} />&nbsp;Password
+          </Label>
+        </FormGroup>
+        <Button className='bg-success'>
+          Submit
+        </Button>
+      </Form>
+    </FormContainer>
   )
 }
 

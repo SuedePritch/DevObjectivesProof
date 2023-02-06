@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-regular-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,6 +23,7 @@
     "axios": "^1.2.3",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
+    "babel-plugin-macros": "^3.1.0",
     "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
     "bfj": "^7.0.2",
@@ -150,5 +155,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.6",
+    "@types/styled-components": "^5.1.26"
   }
 }

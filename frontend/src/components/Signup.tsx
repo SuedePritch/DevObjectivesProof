@@ -1,5 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+
+import FormContainer from '../styledComponents/FormContainer';
+import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faUserTie, faLock } from '@fortawesome/free-solid-svg-icons'
+
+
 import { useDispatch } from 'react-redux';
 import { USER } from '../types/User.types'
 import { setUser } from '../redux/actions'
@@ -25,14 +32,47 @@ return response.data
        
     }
   return (
-    <div>
-        <form action="signup" onSubmit={handleSignup}>
-            <input type="username" name="username" id="username" placeholder='username' autoComplete='username'/>
-            <input type="email" name="email" id="email" placeholder='email' autoComplete='email'/>
-            <input type="password" name="password" id="password" placeholder='password' autoComplete='password'/>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
+    <FormContainer>
+      <Form onSubmit={handleSignup} className="p-3 my-2 text-muted bg-light">
+      <h2 className='py-2'>Sign up</h2>
+        <FormGroup floating>
+          <Input
+            id="signupUsername"
+            name="signupUsername"
+            placeholder="username"
+            type="text"
+          />
+          <Label for="signupUsername">
+          <FontAwesomeIcon icon={faUserTie} />&nbsp;Username
+          </Label>
+        </FormGroup>
+        <FormGroup floating>
+          <Input
+            id="signupEmail"
+            name="signupemail"
+            placeholder="Email"
+            type="email"
+          />
+          <Label for="signupEmail">
+          <FontAwesomeIcon icon={faEnvelope} />&nbsp;Email
+          </Label>
+        </FormGroup>
+        <FormGroup floating>
+          <Input
+            id="signupPassword"
+            name="signupPassword"
+            placeholder="Password"
+            type="password"
+          />
+          <Label for="signupPassword">
+          <FontAwesomeIcon icon={faLock} />&nbsp;Password
+          </Label>
+        </FormGroup>
+        <Button className='bg-success'>
+          Submit
+        </Button>
+      </Form>
+    </FormContainer>
   )
 }
 
