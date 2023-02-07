@@ -9,6 +9,10 @@ const { authMiddleware } = require("./utils/auth");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header(
