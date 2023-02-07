@@ -38,6 +38,7 @@ describe(`Signup`, () => {
     await page.type("#signupPassword", "password1234")
     await page.click(".signup-submit")
     await new Promise((r) => setTimeout(r, 1000));
+    //page should remove login/signup forms if user has successfully logged in 
     const signupForm = (await page.$(".Signup")) ? true : false;
     expect(signupForm).toBe(false)
 });
@@ -50,6 +51,7 @@ describe(`Login`, () => {
     await page.type("#loginPassword", "password")
     await page.click(".login-submit")
     await new Promise((l) => setTimeout(l, 1000));
+    //page should remove login/signup forms if user has successfully logged in 
     const loginForm = (await page.$(".Login")) ? true : false;
     expect(loginForm).toBe(false)
 });
