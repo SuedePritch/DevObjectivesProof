@@ -22,7 +22,6 @@ function App() {
   if(getstate._id.length > 0){
     user = getstate
   }
-  console.log(user);
  
   
   return (
