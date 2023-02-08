@@ -32,3 +32,4 @@ db.once("open", () => {
     console.log(colors.bgBlue("--------------------------------"));
   });
 });
+module.exports = app;
