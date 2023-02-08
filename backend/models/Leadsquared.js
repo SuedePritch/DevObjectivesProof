@@ -1,10 +1,13 @@
 const { Schema, model } = require("mongoose");
 
 const LeadsquaredSchema = new Schema({
-  accesskey: {
+  companyName: {
     type: String,
   },
-  secretkey: {
+  accessKey: {
+    type: String,
+  },
+  secretKey: {
     type: String,
   },
 });

@@ -6,7 +6,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "install": "concurrently \"cd backend && npm install\" \"cd frontend && npm install\"",
-    "start": "concurrently \"cd backend && node server.js\" \"cd frontend && npm start\"",
+    "start": "concurrently \"cd backend && nodemon server.js\" \"cd frontend && npm start\"",
     "build": "cd frontend && npm run build"
   },
   "repository": {

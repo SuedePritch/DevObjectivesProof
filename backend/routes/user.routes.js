@@ -7,7 +7,7 @@ const {
 } = require("../controllers/user.controller");
 const { protect } = require("../utils/auth");
 
-router.post("/", signupUser);
+router.post("/signup", signupUser);
 router.post("/login", loginUser);
 router.get("/me", protect, getMyUser);
 

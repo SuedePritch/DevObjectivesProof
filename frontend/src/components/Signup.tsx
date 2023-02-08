@@ -14,7 +14,7 @@ import {API_URL} from '../App'
 function Signup() {
   const dispatch = useDispatch();
   const signup = async ( signupData:USER ) => {
-    const response = await axios.post(`${API_URL}/user/`, signupData)
+    const response = await axios.post(`${API_URL}/api/user/signup`, signupData)
 
     if (response.data) {
       dispatch(setUser(response.data))

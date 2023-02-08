@@ -7,15 +7,19 @@ const colors = require("colors");
 const PORT = process.env.PORT || 3000;
 const { authMiddleware } = require("./utils/auth");
 /*eslint-enable*/
+let url;
+if (process.env.ENVIRONMENT === "development") {
+  url = "http://localhost:3000";
+} else if (process.env.ENVIRONMENT === "production") {
+  url = "https://dev-objectives-proof.vercel.app";
+}
+
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(function (req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://dev-objectives-proof.vercel.app"
-  ); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", url);
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

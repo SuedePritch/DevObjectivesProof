@@ -45,7 +45,7 @@ const signupUser = asyncHandler(async (req, res) => {
   }
 });
 
-//POST /users/login
+//POST /user/login
 //ACCESS PUBLIC
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;

@@ -1,17 +1,14 @@
-const Leadsquared = require("../models/Leadsquared");
 const asyncHandler = require("express-async-handler");
+const Leadsquared = require("../models/Leadsquared");
 
 const createLeadsquared = asyncHandler(async (req, res) => {
-  const { accesskey, secretkey } = req.body;
-  console.log(accesskey, secretkey);
-  const user = await Leadsquared.create({
-    accesskey: accesskey,
-    secretkey: secretkey,
+  const { companyName, accesskey, secretkey } = req.body;
+  const leadsquared = await Leadsquared.create({
+    companyName: companyName,
+    accessKey: accessKey,
+    secretKey: secretKey,
   });
-  res.json({
-    accesskey,
-    secretkey,
-  });
+  res.status(201).json(leadsquared);
 });
 
 module.exports = {

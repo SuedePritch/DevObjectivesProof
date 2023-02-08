@@ -7,8 +7,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './components/Login'
 import Signup from './components/Signup'
-
-export const API_URL = "https://dev-objectives-proof.vercel.app"
+// let url;
+// if (process.env.ENVIROMENT === "development") {
+//   url = "http://localhost:8080";
+// } else if (process.env.ENVIROMENT === "production") {
+//   url = "https://dev-objectives-proof.vercel.app";
+// }
+export const API_URL = "http://localhost:8080"
 
 let inactivityTimer:any;
 export let inactivityTimerMinutes:number = 0;
