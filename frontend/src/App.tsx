@@ -57,10 +57,10 @@ document.ontouchmove = function () {
 
 
 function App() {
-  // if(!isTimerRunning){
-  //   startInactivityTimer();
-  //   isTimerRunning = true;
-  // }
+  if(!isTimerRunning){
+    startInactivityTimer();
+    isTimerRunning = true;
+  }
   
   let user;
   const getstate = useSelector((state: State) => state.user);
