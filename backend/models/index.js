@@ -1,3 +1,4 @@
 //importing and exporting models
 const User = require("./User");
-module.exports = { User };
+const Leadsquared = require("./Leadsquared");
+module.exports = { User, Leadsquared };
