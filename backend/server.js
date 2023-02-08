@@ -1,5 +1,6 @@
 /* eslint-disable*/
 const express = require("express");
+const path = require("path");
 require("dotenv").config();
 const db = require("./config/connection.js");
 const colors = require("colors");
