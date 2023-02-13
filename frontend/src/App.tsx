@@ -9,71 +9,75 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 
 // Dev
-// export const API_URL = "http://localhost:8080"
+export const API_URL = "http://localhost:8080"
 // Prod
-export const API_URL = "https://dev-objectives-proof.vercel.app"
+// export const API_URL = "https://dev-objectives-proof.vercel.app"
+export let timerState = {
+  inactivityTimer: undefined as NodeJS.Timer | undefined,
+  inactivityTimerMinutes: 0 as number,
+};
 
-let inactivityTimer:any;
-export let inactivityTimerMinutes:number = 0;
-let isTimerRunning = false
-function startInactivityTimer() {
+export function startInactivityTimer() {
   //update every minute
-  inactivityTimer = setInterval(function () {
-    inactivityTimerMinutes++;
-    console.log(`${inactivityTimerMinutes} minutes`);
-    //if one hour of inactivity disconnect from socket and stop timer
-    if (inactivityTimerMinutes >= 60) {
-      console.log("disconnected from socket due to inactivity");
-      resetTimer();
-    }
-  }, 6000);
+    timerState.inactivityTimer = setInterval(function () {
+      timerState.inactivityTimerMinutes++;
+      console.log(`${timerState.inactivityTimerMinutes} minutes`);
+      //if one hour of inactivity disconnect from socket and stop timer
+      if (timerState.inactivityTimerMinutes >= 60) {
+        console.log("disconnected from socket due to inactivity");
+        resetTimer();
+      }
+    }, 60000);
 }
-function resetTimer() {
-  clearInterval(inactivityTimer);
-  isTimerRunning = false;
+
+export function resetTimer() {
+  clearInterval(timerState.inactivityTimer);
+  timerState.inactivityTimerMinutes = 0;
 }
-//
+
+export function startInactivityTimerFromZero(){
+  resetTimer();
+  startInactivityTimer();
+}
+
 //Resets the timer
-//
 //Change browser tab or application
 document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {
-    inactivityTimerMinutes = 0;
+    startInactivityTimerFromZero();
   }
 });
 //if user clicks on window/tab
 window.onfocus = function () {
-  inactivityTimerMinutes = 0;
+  startInactivityTimerFromZero();
 };
 // if user clicks mouse on window
 document.onclick = function () {
-  inactivityTimerMinutes = 0;
+  startInactivityTimerFromZero();
 };
 // if user scrolls on window
 document.onscroll = function () {
-  inactivityTimerMinutes = 0;
+  startInactivityTimerFromZero();
 };
 //if user touches screen on mobile
 document.ontouchmove = function () {
-  inactivityTimerMinutes = 0;
+  startInactivityTimerFromZero();
 };
 
 
 function App() {
-  if(!isTimerRunning){
-    startInactivityTimer();
-    isTimerRunning = true;
-  }
   
   let user;
-  const getstate = useSelector((state: State) => state.user);
-  if(getstate._id.length > 0){
-    user = getstate
+  const getState = useSelector((state: State) => state.user);
+  if(getState._id.length > 0){
+    user = getState
   }
- 
   
+  
+  resetTimer();
+  startInactivityTimer();
   return (
-    <div className="App bg-dark">
+    <div className="App bg-dark" id='App'>
         {user? <p id='username'>{user.username}</p>: 
         <>
         <Login/>
