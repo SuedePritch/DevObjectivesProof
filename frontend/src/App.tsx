@@ -9,9 +9,9 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 
 // Dev
-export const API_URL = "http://localhost:8080"
+// export const API_URL = "http://localhost:8080"
 // Prod
-// export const API_URL = "https://dev-objectives-proof.vercel.app"
+export const API_URL = "https://dev-objectives-proof.vercel.app"
 export let timerState = {
   inactivityTimer: undefined as NodeJS.Timer | undefined,
   inactivityTimerMinutes: 0 as number,
