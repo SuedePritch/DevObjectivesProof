@@ -1,72 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector} from 'react-redux';
 import { State }  from './redux/reducers'
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Login from './components/Login'
-import Signup from './components/Signup'
+// import Login from './components/Login'
+// import Signup from './components/Signup'
 
 // Dev
 // export const API_URL = "http://localhost:8080"
 // Prod
 export const API_URL = "https://dev-objectives-proof.vercel.app"
-export let timerState = {
-  inactivityTimer: undefined as NodeJS.Timer | undefined,
-  inactivityTimerMinutes: 0 as number,
-};
 
-export function startInactivityTimer() {
-  //update every minute
-    timerState.inactivityTimer = setInterval(function () {
-      timerState.inactivityTimerMinutes++;
-      console.log(`${timerState.inactivityTimerMinutes} minutes`);
-      //if one hour of inactivity disconnect from socket and stop timer
-      if (timerState.inactivityTimerMinutes >= 60) {
-        console.log("disconnected from socket due to inactivity");
-        resetTimer();
-      }
-    }, 60000);
-}
-
-export function resetTimer() {
-  clearInterval(timerState.inactivityTimer);
-  timerState.inactivityTimerMinutes = 0;
-}
-
-export function startInactivityTimerFromZero(){
-  resetTimer();
-  startInactivityTimer();
-}
-
-//Resets the timer
-//Change browser tab or application
-document.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "visible") {
-    startInactivityTimerFromZero();
-  }
-});
-//if user clicks on window/tab
-window.onfocus = function () {
-  startInactivityTimerFromZero();
-};
-// if user clicks mouse on window
-document.onclick = function () {
-  startInactivityTimerFromZero();
-};
-// if user scrolls on window
-document.onscroll = function () {
-  startInactivityTimerFromZero();
-};
-//if user touches screen on mobile
-document.ontouchmove = function () {
-  startInactivityTimerFromZero();
-};
 
 
 function App() {
+
+  const [timer, setTimer] = useState<number>(0)
+  useEffect(()=>{
+    const inactivityTimer = setInterval(()=>{
+        setTimer(prevTimer => prevTimer + 1)
+    }, 60000)
+    if(timer >=60){
+      clearInterval(inactivityTimer)
+      console.log("disconnected from socket due to inactivity")
+    }
+    return () => clearInterval(inactivityTimer)
+  }, [timer])
   
+  function resetTimer() {
+    setTimer(0)
+  }
+
+
+  //Resets the timer
+  //Change browser tab or application
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      resetTimer()
+    }
+  });
+  //if user clicks on window/tab
+  window.onfocus = function () {
+    resetTimer()
+  };
+  // if user clicks mouse on window
+  document.onclick = function () {
+    resetTimer()
+  };
+  // if user scrolls on window
+  document.onscroll = function () {
+    resetTimer()
+  };
+  //if user touches screen on mobile
+  document.ontouchmove = function () {
+    resetTimer()
+  };
+
+
   let user;
   const getState = useSelector((state: State) => state.user);
   if(getState._id.length > 0){
@@ -74,14 +66,14 @@ function App() {
   }
   
   
-  resetTimer();
-  startInactivityTimer();
+  // startInactivityTimer();
   return (
     <div className="App bg-dark" id='App'>
         {user? <p id='username'>{user.username}</p>: 
         <>
-        <Login/>
-        <Signup/>
+        <h1 className="text-light p-2" id='inactivityTimer'>{timer}</h1>
+        {/* <Login/>
+        <Signup/> */}
         </>
         }
     </div>
