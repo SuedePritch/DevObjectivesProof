@@ -18,21 +18,33 @@ describe('Timer', () => {
     await browser.close();
   });
   it('resets the timer on page click', async () => {
+
+    // open the page
+    // click away
+    // click back before the timer fires
+    // wait for the total timer threshold to have passed
+    // then check VA.socket.connected
+
+
+
+
+
     const element = await page.$('#inactivityTimer');
     let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(1)
     await page.click('body')
     textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(0)
 })
+
   it('resets the timer on scroll', async () => {
     const element = await page.$('#inactivityTimer');
     let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(1)
     await page.keyboard.press("PageDown");
@@ -43,12 +55,12 @@ describe('Timer', () => {
     const element = await page.$('#inactivityTimer');
     let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(1)
     page2 = await browser.newPage()
     await page2.goto('https://www.google.com')
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await page.bringToFront();
     textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
     expect(parseInt(textContent)).toBe(0)

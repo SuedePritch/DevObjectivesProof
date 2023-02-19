@@ -4,6 +4,53 @@ interface TimerProps{
     timeout: number
 }
 
+declare global{
+  interface Window {
+    connected: boolean
+  }
+}
+
+
+// the user loads the page
+// when they navigate away from the tab
+// we start a timer
+// after a certain amount of time has passed
+// we disconnect the client socket
+
+
+window.connected = true;
+
+let timer :  NodeJS.Timeout
+
+function disconnectSocket() {
+  window.connected = false;
+  console.log('time to disconnect the client socket')
+  // we need to know how long the timer has been running for
+}
+
+function startTimer() {
+  clearInterval(timer)
+  timer = setTimeout(disconnectSocket, 5000) // threshold will likely be 30 seconds
+}
+
+window.addEventListener('blur', function() {
+  startTimer()
+  console.log('blur')
+})
+
+window.addEventListener('focus', function() {
+  clearInterval(timer)
+  console.log('focus')
+})
+
+
+
+
+
+
+
+
+
 function InactivityTimer({timeout}:TimerProps){
   const [timer, setTimer] = useState<number>(0)
   useEffect(()=>{
@@ -46,7 +93,7 @@ function InactivityTimer({timeout}:TimerProps){
     resetTimer()
   };
   return (
-    <p className="text-light p-2" id='inactivityTimer'>{timer}</p>
+    <p className="text-light p-2" aria-label="hidden" id='inactivityTimer'>{timer}</p>
   )
 }
 

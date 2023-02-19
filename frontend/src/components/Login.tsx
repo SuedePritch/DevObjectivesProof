@@ -11,6 +11,16 @@ import { USER } from '../types/User.types'
 import { setUser } from '../redux/actions'
 import {API_URL} from '../App'
 
+import AJV from 'ajv'
+const ajv = new AJV()
+const loginDataSchema = {
+  type: "object",
+  properties:{
+  email: {type: "string"},
+  password: {type: "string"}
+  },
+  required:["email", "password"]
+}
 
 
 
@@ -31,7 +41,12 @@ return response.data
           email: event.target.email.value,
           password: event.target.password.value
         }
-        login(loginData)
+        const validLoginData = ajv.validate(loginDataSchema, loginData)
+        if(validLoginData){
+          login(loginData)
+        }else{
+          console.error(ajv.errors)
+        }
        
     }
 

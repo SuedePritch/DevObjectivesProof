@@ -11,6 +11,19 @@ import { useDispatch } from 'react-redux';
 import { USER } from '../types/User.types'
 import { setUser } from '../redux/actions'
 import {API_URL} from '../App'
+import AJV from 'ajv'
+const ajv = new AJV()
+const signupDataSchema = {
+  type: "object",
+  properties:{
+  username:{type:"string"},
+  email: {type: "string"},
+  password: {type: "string"}
+  },
+  required:["username", "email", "password"]
+}
+
+
 function Signup() {
   const dispatch = useDispatch();
   const signup = async ( signupData:USER ) => {
@@ -28,7 +41,13 @@ return response.data
           email: event.target.signupEmail.value,
           password: event.target.signupPassword.value
         }
-        signup(signupData)
+        const validLoginData = ajv.validate(signupDataSchema, signupData)
+        if(validLoginData){
+          signup(signupData)
+        }else{
+          console.error(ajv.errors)
+        }
+        
        
     }
   return (
