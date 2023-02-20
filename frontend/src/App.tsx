@@ -12,9 +12,9 @@ import Signup from './components/Signup'
 import DateFns from './components/DateFns';
 
 // Dev
-export const API_URL = "http://localhost:8080"
+// export const API_URL = "http://localhost:8080"
 // Prod
-// export const API_URL = "https://dev-objectives-proof.vercel.app"
+export const API_URL = "https://dev-objectives-proof.vercel.app"
 
 function App() {
   let user;
