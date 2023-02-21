@@ -19,12 +19,12 @@ Used
 &#9745; Voca  
 &#9745; Date-Fns  
 &#9745; AJV/JSON Schema  
-&#9745; MongoDB & CRUD
-&#9745; Docker
-&#974; Webpack  
-&#9745; Babel
+&#9745; MongoDB & CRUD  
+&#9745; Docker  
+&#9745; Webpack  
+&#9745; Babel  
 &#9745; DNS  
 &#9745; GOF patterns
+&#9745; Object mutability/immutability
 
-&#9744; Object mutability/immutability  
 &#9744; Read Ninja
