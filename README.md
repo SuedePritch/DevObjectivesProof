@@ -24,7 +24,7 @@ Used
 &#9745; Webpack  
 &#9745; Babel  
 &#9745; DNS  
-&#9745; GOF patterns
+&#9745; GOF patterns  
 &#9745; Object mutability/immutability
 
 &#9744; Read Ninja
