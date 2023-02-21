@@ -9,6 +9,7 @@ describe('Timer', () => {
       headless:false,
       slowMo:50
     });
+    // open the page
     page = await browser.newPage();
     await page.goto('http://localhost:3000');
     await page.waitForSelector('#inactivityTimer')
@@ -17,52 +18,21 @@ describe('Timer', () => {
   afterAll(async () => {
     await browser.close();
   });
-  it('resets the timer on page click', async () => {
-
-    // open the page
+  it('disconnects from socket when user is inactive', async () => {
     // click away
-    // click back before the timer fires
-    // wait for the total timer threshold to have passed
-    // then check VA.socket.connected
-
-
-
-
-
-    const element = await page.$('#inactivityTimer');
-    let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(1)
-    await page.click('body')
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
-})
-
-  it('resets the timer on scroll', async () => {
-    const element = await page.$('#inactivityTimer');
-    let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(1)
-    await page.keyboard.press("PageDown");
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
-})
-  it('resets the timer when user clicks on tab/page', async () => {
-    const element = await page.$('#inactivityTimer');
-    let textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(1)
     page2 = await browser.newPage()
     await page2.goto('https://www.google.com')
     await new Promise(resolve => setTimeout(resolve, 2000));
+    // click back before the timer fires
     await page.bringToFront();
-    textContent = await page.evaluate((element: { textContent: any; }) => element.textContent, element);
-    expect(parseInt(textContent)).toBe(0)
+    // then check VA.socket.connected
+    let connected = await page.evaluate(() => window.connected);
+    expect(connected).toBe(true)
+    await page2.bringToFront();
+    // wait for the total timer threshold to have passed
+    await new Promise(resolve => setTimeout(resolve, 60000));
+    // then check VA.socket.connected
+    connected = await page.evaluate(() => window.connected);
+    expect(connected).toBe(false)
 })
 })

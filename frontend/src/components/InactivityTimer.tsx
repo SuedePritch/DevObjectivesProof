@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
-
-interface TimerProps{
-    timeout: number
-}
+import React from 'react';
 
 declare global{
-  interface Window {
+  export interface Window {
     connected: boolean
   }
 }
@@ -16,26 +12,35 @@ declare global{
 // we start a timer
 // after a certain amount of time has passed
 // we disconnect the client socket
-
-
+ 
 window.connected = true;
 
 let timer :  NodeJS.Timeout
 
+function startTimer(disconnectTimeout:number) {
+  console.log(window.connected);
+  let timerValue:number = 0;
+  clearInterval(timer)
+  timer = setInterval(() => {
+    timerValue++
+    console.log(timerValue)
+    if(timerValue >= disconnectTimeout){
+      disconnectSocket();
+    }
+  }, 1000)
+}
+
 function disconnectSocket() {
   window.connected = false;
-  console.log('time to disconnect the client socket')
-  // we need to know how long the timer has been running for
+  console.log(window.connected);
+  clearInterval(timer)
+  // console.log('disconnect the client socket')
 }
 
-function startTimer() {
-  clearInterval(timer)
-  timer = setTimeout(disconnectSocket, 5000) // threshold will likely be 30 seconds
-}
 
 window.addEventListener('blur', function() {
-  startTimer()
-  console.log('blur')
+  startTimer(10)
+  console.log("blur")
 })
 
 window.addEventListener('focus', function() {
@@ -43,57 +48,10 @@ window.addEventListener('focus', function() {
   console.log('focus')
 })
 
-
-
-
-
-
-
-
-
-function InactivityTimer({timeout}:TimerProps){
-  const [timer, setTimer] = useState<number>(0)
-  useEffect(()=>{
-    const inactivityTimer = setInterval(()=>{
-        setTimer(prevTimer => prevTimer + 1)
-    }, 1000)
-    if(timer >= timeout){
-      clearInterval(inactivityTimer)
-      console.log("disconnected from socket due to inactivity")
-    }
-    return () => clearInterval(inactivityTimer)
-  }, [timer, timeout])
-  
-  function resetTimer() {
-    setTimer(0)
-  }
-
-
-  //Resets the timer
-  //Change browser tab or application
-  document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      resetTimer()
-    }
-  });
-  //if user clicks on window/tab
-  window.onfocus = function () {
-    resetTimer()
-  };
-  // if user clicks mouse on window
-  document.onclick = function () {
-    resetTimer()
-  };
-  // if user scrolls on window
-  document.onscroll = function () {
-    resetTimer()
-  };
-  //if user touches screen on mobile
-  document.ontouchmove = function () {
-    resetTimer()
-  };
+function InactivityTimer(){
+ 
   return (
-    <p className="text-light p-2" aria-label="hidden" id='inactivityTimer'>{timer}</p>
+    <p className="text-light p-2" aria-label="hidden" id='inactivityTimer'></p>
   )
 }
 

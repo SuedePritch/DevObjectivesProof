@@ -5,7 +5,7 @@ import { State }  from './redux/reducers'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import InactivityTimer from './components/InactivityTimer';
+import InactivityTimer from './components/InactivityTimer';
 import Voca from './components/Voca';
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -28,7 +28,7 @@ function App() {
     <div className="App bg-dark" id='App'>
         {user? <p id='username'>{user.username}</p>: 
         <>
-        {/* <InactivityTimer timeout={60}/> */}
+        <InactivityTimer/>
         <Voca/>
         <DateFns/>
         <Login/>
