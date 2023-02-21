@@ -21,7 +21,10 @@ Used
 &#9745; AJV/JSON Schema  
 &#9745; MongoDB & CRUD
 &#9745; Docker
+&#974; Webpack  
+&#9745; Babel
 
-&#9744; Webpack  
-&#9744; Babel  
-&#9744; Object mutability/immutability
+&#9744; Object mutability/immutability  
+&#9744; GOF patterns  
+&#9744; Read Ninja  
+&#9744; DNS
