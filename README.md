@@ -23,8 +23,8 @@ Used
 &#9745; Docker
 &#974; Webpack  
 &#9745; Babel
+&#9745; DNS  
+&#9745; GOF patterns
 
 &#9744; Object mutability/immutability  
-&#9744; GOF patterns  
-&#9744; Read Ninja  
-&#9744; DNS
+&#9744; Read Ninja
