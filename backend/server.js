@@ -5,7 +5,8 @@ require("dotenv").config();
 const db = require("./config/connection.js");
 const colors = require("colors");
 const PORT = process.env.PORT || 3000;
-const { authMiddleware } = require("./utils/auth");
+const { ErrorHandler } = require("./utils/errorHandler");
+// const { authMiddleware } = require("./utils/auth");
 /*eslint-enable*/
 let url;
 if (process.env.ENVIRONMENT === "development") {
@@ -45,4 +46,6 @@ app.get("/", (req, res) => {
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
+
+app.use(ErrorHandler);
 module.exports = app;

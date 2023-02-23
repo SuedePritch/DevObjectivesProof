@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import styled from 'styled-components';
 
 import FormContainer from '../styledComponents/FormContainer';
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
@@ -20,11 +21,15 @@ const signupDataSchema = {
   email: {type: "string"},
   password: {type: "string"}
   },
-  required:["username", "email", "password"]
+  required:["username", "email", "password"],
+  additionalProperties: false
 }
+const LeftFormContainer = styled(FormContainer)`
+justify-content: left;
+padding-left:3rem
+`
 
-
-function Signup() {
+const Signup: React.FC = () => {
   const dispatch = useDispatch();
   const signup = async ( signupData:USER ) => {
     const response = await axios.post(`${API_URL}/api/user/signup`, signupData)
@@ -41,8 +46,8 @@ return response.data
           email: event.target.signupEmail.value,
           password: event.target.signupPassword.value
         }
-        const validLoginData = ajv.validate(signupDataSchema, signupData)
-        if(validLoginData){
+        const validSignupData = ajv.validate(signupDataSchema, signupData)
+        if(validSignupData){
           signup(signupData)
         }else{
           console.error(ajv.errors)
@@ -51,7 +56,7 @@ return response.data
        
     }
   return (
-    <FormContainer className='Signup'>
+    <LeftFormContainer className='Signup'>
       <Form onSubmit={handleSignup} className="p-3 my-2 text-muted bg-light">
       <h2 className='py-2' id='signup' >Sign up</h2>
         <FormGroup floating>
@@ -91,7 +96,7 @@ return response.data
           Submit
         </Button>
       </Form>
-    </FormContainer>
+    </LeftFormContainer>
   )
 }
 

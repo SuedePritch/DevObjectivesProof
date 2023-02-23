@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import styled from 'styled-components';
 
 import FormContainer from '../styledComponents/FormContainer';
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
@@ -19,12 +20,16 @@ const loginDataSchema = {
   email: {type: "string"},
   password: {type: "string"}
   },
-  required:["email", "password"]
+  required:["email", "password"],
+  additionalProperties: false
 }
+const RightFormContainer = styled(FormContainer)`
+justify-content: right;
+padding-right:3rem
+`
 
 
-
-function Login() {
+const Login: React.FC = () => {
   const dispatch = useDispatch();
   const login = async ( loginData:USER ) => {
     const response = await axios.post(`${API_URL}/api/user/login`, loginData)
@@ -51,7 +56,7 @@ return response.data
     }
 
   return (
-    <FormContainer className='Login'>
+    <RightFormContainer className='Login'>
       <Form onSubmit={handleLogin} className="p-3 my-2 text-muted bg-light">
         <h2 id="login" className='py-2'>Login</h2>
         <FormGroup floating>
@@ -80,7 +85,7 @@ return response.data
           Submit
         </Button>
       </Form>
-    </FormContainer>
+    </RightFormContainer>
   )
 }
 

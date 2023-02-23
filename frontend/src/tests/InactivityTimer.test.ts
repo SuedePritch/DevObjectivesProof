@@ -22,7 +22,7 @@ describe('Timer', () => {
     // click away
     page2 = await browser.newPage()
     await page2.goto('https://www.google.com')
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     // click back before the timer fires
     await page.bringToFront();
     // then check VA.socket.connected
@@ -30,7 +30,7 @@ describe('Timer', () => {
     expect(connected).toBe(true)
     await page2.bringToFront();
     // wait for the total timer threshold to have passed
-    await new Promise(resolve => setTimeout(resolve, 60000));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     // then check VA.socket.connected
     connected = await page.evaluate(() => window.connected);
     expect(connected).toBe(false)

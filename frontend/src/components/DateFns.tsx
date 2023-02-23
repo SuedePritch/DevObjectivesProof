@@ -2,7 +2,7 @@ import React from 'react'
 import {format} from 'date-fns'
 import add from 'date-fns/add'
 
-function DateFns() {
+const DateFns: React.FC = () =>  {
     const todayIs = format(new Date(), "'Today is a' eeee")
     const todaysDate = format(new Date(),'MM/dd/yyyy')
     const thirtyDaysFromToday = format(add(new Date(), {days:30}), 'MM/dd/yyyy')

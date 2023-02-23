@@ -4,7 +4,7 @@ import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
 import FormContainer from '../styledComponents/FormContainer'
 
 const v = voca
-function Voca() {
+const Voca: React.FC = () =>  {
     const [slug, setSlug]= useState("")
     const slugify = (event:any) =>{
         event.preventDefault()

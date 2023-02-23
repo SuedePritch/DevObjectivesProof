@@ -18,21 +18,16 @@ window.connected = true;
 let timer :  NodeJS.Timeout
 
 function startTimer(disconnectTimeout:number) {
-  console.log(window.connected);
-  let timerValue:number = 0;
+  // console.log(window.connected);
   clearInterval(timer)
-  timer = setInterval(() => {
-    timerValue++
-    console.log(timerValue)
-    if(timerValue >= disconnectTimeout){
+  timer = setTimeout(() => {
       disconnectSocket();
-    }
-  }, 1000)
+  }, disconnectTimeout)
 }
 
 function disconnectSocket() {
   window.connected = false;
-  console.log(window.connected);
+  // console.log(window.connected);
   clearInterval(timer)
   // console.log('disconnect the client socket')
 }
@@ -40,12 +35,12 @@ function disconnectSocket() {
 
 window.addEventListener('blur', function() {
   startTimer(10)
-  console.log("blur")
+  // console.log("blur")
 })
 
 window.addEventListener('focus', function() {
   clearInterval(timer)
-  console.log('focus')
+  // console.log('focus')
 })
 
 function InactivityTimer(){
