@@ -2,11 +2,12 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const nodeExternals = require("webpack-node-externals");
+// const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
-  externalsPresets: { node: true },
-  externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  target: "web",
+  // externalsPresets: { node: true },
+  // externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
   context: __dirname,
   entry: "./src/index.tsx",
   output: {
