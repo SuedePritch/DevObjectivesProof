@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
@@ -94,10 +95,10 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
+    "browserify": "browserify src/index.tsx -o dist/bundle.js",
     "serve": "webpack --stats minimal  --mode development",
-    "bundle": "webpack --mode production",
+    "build": "webpack --mode production",
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
     "test": "jest /tests/InactivityTimer --silent=false"
   },
   "eslintConfig": {
@@ -176,6 +177,7 @@
   },
   "devDependencies": {
     "assert": "^2.0.0",
+    "browserify": "^17.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "https-browserify": "^1.0.0",

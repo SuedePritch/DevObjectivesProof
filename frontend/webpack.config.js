@@ -2,31 +2,40 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-// const nodeExternals = require("webpack-node-externals");
+const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
   target: "web",
-  // externalsPresets: { node: true },
-  // externals: [nodeExternals()], // in order to ignore all modules in node_modules folder
+  externalsPresets: { node: true },
+  externals: [nodeExternals()],
   context: __dirname,
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "[name].js",
+    filename: "[name].bundle.js",
   },
   resolve: {
-    modules: ["node_modules"],
     extensions: [".ts", ".tsx", "js", "jsx"],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "ts-loader",
           options: {
-            onlyCompileBundledFiles: true,
+            transpileOnly: true,
+          },
+        },
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
@@ -50,6 +59,30 @@ module.exports = {
           },
         ],
       },
+
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        type: "javascript/auto",
+        loader: "file-loader",
+        options: {
+          publicPath: "../",
+          name: "[path][name].[ext]",
+          context: path.resolve(__dirname, "src/public"),
+          emitFile: true,
+        },
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: "javascript/auto",
+        exclude: /images/,
+        loader: "file-loader",
+        options: {
+          publicPath: "../",
+          context: path.resolve(__dirname, "src/public"),
+          name: "[path][name].[ext]",
+          emitFile: true,
+        },
+      },
     ],
   },
   optimization: {
@@ -61,7 +94,7 @@ module.exports = {
       template: path.resolve(__dirname, "./public/index.html"),
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "[name].bundle.css",
       chunkFilename: "[id].css",
     }),
     new ForkTsCheckerWebpackPlugin(),
