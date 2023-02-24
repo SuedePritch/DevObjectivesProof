@@ -8,14 +8,16 @@
     ],
     "allowJs": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "strict": true,
     "isolatedModules": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react"
   },
   "include": [
     "src"
   ]
 }
+ 
