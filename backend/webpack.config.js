@@ -8,7 +8,7 @@ module.exports = {
   externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "[name].[contenthash].js",
+    filename: "[name].js",
     clean: true,
   },
   mode: "production",

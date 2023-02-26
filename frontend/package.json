@@ -93,7 +93,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "react-scripts start",
     "build": "webpack --mode production",
     "serve": "webpack serve",
     "test": "node scripts/test.js"

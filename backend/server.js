@@ -4,7 +4,7 @@ const path = require("path");
 require("dotenv").config();
 const db = require("./config/connection.js");
 const colors = require("colors");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const { ErrorHandler } = require("./utils/errorHandler");
 // const { authMiddleware } = require("./utils/auth");
 /*eslint-enable*/
@@ -44,9 +44,9 @@ app.use(express.static(path.join(__dirname, "../frontend/build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
 });
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-// });
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
 
 app.use(ErrorHandler);
 module.exports = app;
