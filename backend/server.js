@@ -16,7 +16,7 @@ if (process.env.ENVIRONMENT === "development") {
 }
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -39,13 +39,14 @@ db.once("open", () => {
 });
 
 app.use(require("./controllers"));
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.use(express.static(path.resolve(__dirname, "../frontend/build")));
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 });
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+// });
 
 app.use(ErrorHandler);
 module.exports = app;
