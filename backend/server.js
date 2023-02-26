@@ -9,10 +9,10 @@ const { ErrorHandler } = require("./utils/errorHandler");
 // const { authMiddleware } = require("./utils/auth");
 /*eslint-enable*/
 let url;
-if (process.env.ENVIRONMENT === "development") {
-  url = "http://localhost:3000";
-} else if (process.env.ENVIRONMENT === "production") {
+if (process.env.ENVIRONMENT === "production") {
   url = "https://dev-objectives-proof.vercel.app";
+} else {
+  url = "http://localhost:3000";
 }
 
 const app = express();

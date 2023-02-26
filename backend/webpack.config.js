@@ -1,7 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
-
+const Dotenv = require("dotenv-webpack");
+// const dotenv = require("dotenv");
+// const env = dotenv.config().parsed;
+// const envKeys = Object.keys(env).reduce((prev, next) => {
+//   prev[`process.env.${next}`] = JSON.stringify(env[next]);
+//   return prev;
+// }, {});
 module.exports = {
   target: "node",
   entry: "./server.js",
@@ -64,5 +70,17 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: "process/browser",
     }),
+    new Dotenv({
+      path: "./.env", // Path to .env file (this is the default)
+      safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+    }),
+    // new webpack.EnvironmentPlugin(["MONGO_CREDENTIALS", "JWT_SECRET"]),
+    // new webpack.DefinePlugin({ envKeys }),
+    // new webpack.DefinePlugin({
+    //   "process.env.MONGO_CREDENTIALS": JSON.stringify(
+    //     process.env.MONGO_CREDENTIALS
+    //   ),
+    //   "process.env.JWT_SECRET": JSON.stringify(process.env.JWT_SECRET),
+    // }),
   ],
 };
