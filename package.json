@@ -18,7 +18,6 @@
   "bugs": {
     "url": "https://github.com/SuedePritch/DevObjectivesProof/issues"
   },
-  "homepage": "https://dev-objectives-proof.vercel.app/",
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
