@@ -1,26 +1,39 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const nodeExternals = require("webpack-node-externals");
 
 module.exports = {
   target: "web",
-  externalsPresets: { node: true },
-  externals: [nodeExternals()],
-  context: __dirname,
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "[name].bundle.js",
+    filename: "[name].[contenthash].js",
+    clean: true,
+  },
+  mode: "production",
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "build"),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
+  performance: {
+    hints: false,
   },
   resolve: {
-    extensions: [".ts", ".tsx", "js", "jsx"],
+    modules: [path.join(__dirname, "node_modules")],
+    extensions: [".wasm", ".ts", ".tsx", ".mjs", ".cjs", ".js", ".json"],
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "ts-loader",
@@ -30,12 +43,16 @@ module.exports = {
         },
       },
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
           },
         },
       },
@@ -59,37 +76,19 @@ module.exports = {
           },
         ],
       },
-
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-        type: "javascript/auto",
-        loader: "file-loader",
-        options: {
-          publicPath: "../",
-          name: "[path][name].[ext]",
-          context: path.resolve(__dirname, "src/public"),
-          emitFile: true,
-        },
-      },
-      {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: "javascript/auto",
-        exclude: /images/,
-        loader: "file-loader",
-        options: {
-          publicPath: "../",
-          context: path.resolve(__dirname, "src/public"),
-          name: "[path][name].[ext]",
-          emitFile: true,
-        },
-      },
     ],
   },
   optimization: {
     minimize: false,
     nodeEnv: false,
+    splitChunks: {
+      chunks: "all",
+    },
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./public/index.html"),
     }),

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import FormContainer from '../styledComponents/FormContainer';
 import {Form, FormGroup, Input, Label, Button} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faUserTie, faLock } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faEnvelope, faUserTie, faLock } from '@fortawesome/free-solid-svg-icons'
 
 
 import { useDispatch } from 'react-redux';
@@ -67,7 +67,7 @@ return response.data
             type="text"
           />
           <Label for="signupUsername">
-          <FontAwesomeIcon icon={faUserTie} />&nbsp;Username
+          Username
           </Label>
         </FormGroup>
         <FormGroup floating>
@@ -78,7 +78,7 @@ return response.data
             type="email"
           />
           <Label for="signupEmail">
-          <FontAwesomeIcon icon={faEnvelope} />&nbsp;Email
+          Email
           </Label>
         </FormGroup>
         <FormGroup floating>
@@ -89,7 +89,7 @@ return response.data
             type="password"
           />
           <Label for="signupPassword">
-          <FontAwesomeIcon icon={faLock} />&nbsp;Password
+          Password
           </Label>
         </FormGroup>
         <Button className='signup-submit bg-success'>
