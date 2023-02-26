@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
@@ -17,9 +19,12 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "webpack": "^5.75.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18"
+    "@types/node": "^18.11.18",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
